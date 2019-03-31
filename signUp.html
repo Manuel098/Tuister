@@ -1,0 +1,31 @@
+<section class="nevbar">
+  <div ng-if="token != null" class="col-md-6 menu">
+    <a href="#/index">Inicio</a>
+    <a href="#/profile">Perfil</a>
+    <a ng-click="logOut()">Cerrar Sesión</a>
+  </div>
+  <div ng-if="token == null" class="col-md-6 menu">
+    <a href="#/signUp">Registrarse</a>
+    <a href="#/login">Iniciar Sesión</a>
+  </div>
+</section>
+<div class="conteiner">
+  <div class="col-md-6 offset-md-3">
+    <h2>Registro</h2>
+    <div class="row">
+      <input type="text" class="form-control" placeholder="name" ng-model="usuario.name"></input>
+    </div>
+    <div class="row">
+      <input type="text" class="form-control" placeholder="nickname" ng-model="usuario.nickname"></input> 
+    </div>
+    <div class="row">
+      <input type="email" class="form-control" placeholder="email" ng-model="usuario.email"></input> 
+    </div>
+    <div class="row">
+      <input type="password" class="form-control" placeholder="password" ng-model="usuario.password"></input> 
+    </div>
+    <div class="row">
+      <button class="btn btn-primary btn-lg btn-block" ng-click="crearUsuario()">Refistrarse</button>
+    </div>
+  </div>
+</div>

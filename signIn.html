@@ -1,0 +1,30 @@
+<section class="nevbar">
+  <div ng-if="token != null" class="col-md-6 menu">
+    <a href="#/index">Inicio</a>
+    <a href="#/profile">Perfil</a>
+    <a ng-click="logOut()">Cerrar Sesión</a>
+  </div>
+  <div ng-if="token == null" class="col-md-6 menu">
+    <a href="#/signUp">Registrarse</a>
+    <a href="#/login">Iniciar Sesión</a>
+  </div>
+</section>
+<div class="conteiner">
+  <div class="col-md-6 offset-md-3">
+      <h2>Iniciar Sesión</h2>
+    <div class="row">
+      <input type="text" class="form-control" ng-model = "usuario.nickname" placeholder="Usuario">
+    </div>
+    <div class="row">
+        <input type="password" class="form-control" ng-model = "usuario.password" placeholder="Contraseña">
+    </div>
+    <div class="row">
+      <button class="btn btn-primary btn-lg btn-block" ng-click="signIn()">Iniciar Secion</button>
+    </div>
+    <div class="row">
+      <div class="alert alert-primary" role = "alert">
+        <a href="#/signUp">No tengo una cuenta.</a>
+      </div>
+    </div>
+  </div>
+</div>

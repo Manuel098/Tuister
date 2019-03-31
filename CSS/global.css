@@ -1,0 +1,40 @@
+body{
+    background: #f8ffff;
+}
+div .menu{
+    display: inline-block;
+    text-align: right;
+}
+.nevbar a{
+    padding: 5%;
+    text-align: right;
+}
+
+/* POSTS */
+
+div .post{
+    padding: 10px 0;
+}
+img{
+    border-radius: 10px;
+}
+
+/* buttons post */
+
+.content button{
+    border-radius: 10px;
+    font-family: sans-serif;
+    color: #fbffff;
+    background: #b96a00;
+    border: 0;
+}
+.content button, .content h3{
+    display: inline-block;
+}
+
+div.content section{
+    margin-top: 5%;
+}
+div.likes, div.buttons{
+    display: inline-block;
+}

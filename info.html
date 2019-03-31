@@ -1,0 +1,17 @@
+<section class="nevbar">
+    <div ng-if="token != null" class="col-md-6 menu">
+        <a href="#/index">Inicio</a>
+        <a href="#/profile">Perfil</a>
+        <a ng-click="logOut()">Cerrar Sesión</a>
+    </div>
+    <div ng-if="token == null" class="col-md-6 menu">
+        <a href="#/signUp">Registrarse</a>
+        <a href="#/login">Iniciar Sesión</a>
+    </div>
+</section>
+<li class="card" ng-repeat="r in respuesta">
+    <h1 > {{r.title}}</h1>
+    <h2>{{r.body}} </h2>
+    <h3>{{r.user_id}} </h3>	    
+    <button ng-click="mostrarNombre(m)">
+</li>

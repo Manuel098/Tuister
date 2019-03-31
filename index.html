@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="tuister">
+<head>
+	<meta charset="utf-8">
+	<title>Aplicación TUISTER</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="CSS/bootstrap.min.css">
+	<link rel="stylesheet" href="CSS/global.css">
+	<!-- AngularJS -->
+	<script src="JS/angular.min.js"></script>
+	<script src="JS/angular-route.min.js"></script>
+	<!-- JQuery -->
+	<script src="JS/jquery-3.3.1.min.js"></script>
+	<!-- CONFIG -->
+	<script src="JS/app.js"></script>
+	<script src="JS/controller.js"></script>
+	<script src="JS/info.js"></script>
+	<script src="JS/signIn.js"></script>
+	<script src="JS/signUp.js"></script>
+	<script src="JS/profile.js"></script>
+	<script src="JS/service.js"></script>
+	<script src="JS/directive.js"></script>
+</head>
+
+<body ng-view>
+	<section class="nevbar">
+		<div ng-if="token != null" class="col-md-6 menu">
+			<a href="#/index">Inicio</a>
+			<a href="#/profile">Perfil</a>
+			<a ng-click="logOut()">Cerrar Sesión</a>
+		</div>
+		<div ng-if="token == null" class="col-md-6 menu">
+			<a href="#/signUp">Registrarse</a>
+			<a href="#/login">Iniciar Sesión</a>
+		</div>
+	</section>
+</body>
+</html>
