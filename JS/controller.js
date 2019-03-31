@@ -6,6 +6,11 @@ tuister.controller('Demo', function($scope, $http, fileUpload){
     $scope.likes={};
     $scope.nLikesPost={};
     $scope.likPost=[];
+    $scope.nLikesComent={};
+    $scope.likComent=[];
+    $scope.comentsArray={};
+    $scope.coments=[];
+    
     
     $http.get("http://tuister.com/posts", {
         transformRequest: angular.identity,
@@ -32,6 +37,47 @@ tuister.controller('Demo', function($scope, $http, fileUpload){
                 $scope.likPost.push(like);
                 cont = 0;
             }
+        });
+        // COMENT'S
+        $http.get("http://tuister.com/comments",{
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined,
+                    'token':window.localStorage.getItem("token")},
+        }).then(function(response){
+            $scope.comentsArray= response.data[0];
+            for(i=0; i<$scope.respuesta.length; i++){
+                for(j=0; j<$scope.comentsArray.length; j++){
+                    if($scope.respuesta[i]["id"]==$scope.comentsArray[j]["post_id"]){
+                        coment={
+                            "id":$scope.respuesta[i]["id"],
+                            "coment_id":$scope.comentsArray[j]["id"],
+                            "coment":$scope.comentsArray[j]["body"]};
+                        $scope.coments.push(coment);
+                    }
+                }
+            }
+            // GET LIKES
+            $http.get("http://tuister.com/likes",{
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined,
+                        'token':window.localStorage.getItem("token")},
+            }).then(function(response){
+                $scope.nLikesComent= response.data[0];
+                var cont=0;
+                for(i=0; i<$scope.coments.length; i++){
+                    for(j=0; j<$scope.nLikesComent.length; j++){
+                        if($scope.coments[i]["coment_id"]==$scope.nLikesComent[j]["comment_id"]){
+                            cont++;
+                        }
+                    }
+                    like={"id":$scope.coments[i]["coment_id"],
+                        "val":cont}
+                    $scope.likComent.push(like);
+                    cont = 0;
+                }
+                console.log($scope.likComent);
+            });
+            console.log($scope.coments);
         });
     });
 

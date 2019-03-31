@@ -17,6 +17,10 @@ div .post{
 }
 img{
     border-radius: 10px;
+    vertical-align: middle;
+}
+.image{
+    vertical-align: middle;
 }
 
 /* buttons post */

@@ -6,8 +6,11 @@ tuister.controller('Profile', function($scope, $http, fileUpload){
     $scope.coment={};
     $scope.likes={};
     $scope.nLikesPost={};
+    $scope.nLikesComent={};
     $scope.likPost=[];
+    $scope.likComent=[];
     $scope.comentsArray={};
+    $scope.coments=[];
 
     $scope.$watch('myFile', function (newVal) {
         if (newVal)
@@ -44,8 +47,6 @@ tuister.controller('Profile', function($scope, $http, fileUpload){
                 $scope.likPost.push(like);
                 cont = 0;
             }
-            console.log($scope.likPost);
-            console.log($scope.respuesta);
         });
         // COMENT'S
         $http.get("http://tuister.com/comments",{
@@ -53,21 +54,40 @@ tuister.controller('Profile', function($scope, $http, fileUpload){
             headers: {'Content-Type': undefined,
                     'token':window.localStorage.getItem("token")},
         }).then(function(response){
-            $scope.comentsArray= response.data;
-            // var cont=0;
-            // for(i=0; i<$scope.respuesta.length; i++){
-            //     for(j=0; j<$scope.nLikesPost.length; j++){
-            //         if($scope.respuesta[i]["id"]==$scope.nLikesPost[j]["post_id"]){
-            //             cont++;
-            //         }
-            //     }
-            //     like={"id":$scope.respuesta[i]["id"],
-            //         "val":cont}
-            //     $scope.likPost.push(like);
-            //     cont = 0;
-            // }
-            // console.log($scope.likPost);
-            console.log("Comentarios: "+$scope.comentsArray);
+            $scope.comentsArray= response.data[0];
+            for(i=0; i<$scope.respuesta.length; i++){
+                for(j=0; j<$scope.comentsArray.length; j++){
+                    if($scope.respuesta[i]["id"]==$scope.comentsArray[j]["post_id"]){
+                        coment={
+                            "id":$scope.respuesta[i]["id"],
+                            "coment_id":$scope.comentsArray[j]["id"],
+                            "coment":$scope.comentsArray[j]["body"]};
+                        $scope.coments.push(coment);
+                    }
+                }
+            }
+            // GET LIKES
+            $http.get("http://tuister.com/likes",{
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined,
+                        'token':window.localStorage.getItem("token")},
+            }).then(function(response){
+                $scope.nLikesComent= response.data[0];
+                var cont=0;
+                for(i=0; i<$scope.coments.length; i++){
+                    for(j=0; j<$scope.nLikesComent.length; j++){
+                        if($scope.coments[i]["coment_id"]==$scope.nLikesComent[j]["comment_id"]){
+                            cont++;
+                        }
+                    }
+                    like={"id":$scope.coments[i]["coment_id"],
+                        "val":cont}
+                    $scope.likComent.push(like);
+                    cont = 0;
+                }
+                console.log($scope.likComent);
+            });
+            console.log($scope.coments);
         });
     });
 
@@ -80,6 +100,15 @@ tuister.controller('Profile', function($scope, $http, fileUpload){
         fileUpload.insert(uploadUrl, data);
     }
 
+    $scope.likeComment = function(id){
+        var uploadUrl = "http://tuister.com/likeComment";
+        var data = {
+            "user_id": window.localStorage.getItem("user_id"),
+            "comment_id": id
+        }
+        fileUpload.insert(uploadUrl, data);
+    }
+    
     // POST'S
     $scope.uploadFile = function(){
         var file =$scope.myFile;

@@ -32,6 +32,19 @@
                 <div class="content col-md-5 offset-md-1">
                     <h3 class="col-md-8">{{r.title}}</h3>
                     <p class="col-md-12">{{r.body}}</p>
+                    <div>
+                        <div class="coments" ng-repeat="c in coments">
+                            <div ng-if="r.id==c.id">
+                                <p>{{c.coment}}</p>
+                                <div class="likes" ng-repeat="li in likComent">
+                                    <div ng-if="c.coment_id==li.id">
+                                        <p>{{li.val}} Likes</p>
+                                        <button class="btn-secondary" ng-click="likeComment(c.coment_id)">Like</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <input type="text" class="form-control col-md-12" ng-model = "coment.title" placeholder="titulo">
                     <input type="text" class="form-control col-md-12" ng-model = "coment.body" placeholder="Contenido">
                     <input type="file" class="col-md-6" name="imagen" file-model = 'comentFile'>
@@ -54,6 +67,19 @@
                 <div class="content">
                     <h3 class="col-md-8">{{r.title}}</h3>
                     <p class="col-md-12">{{r.body}}</p>
+                    <div>
+                        <div class="coments" ng-repeat="c in coments">
+                            <div ng-if="r.id==c.id">
+                                <p>{{c.coment}}</p>
+                                <div class="likes" ng-repeat="li in likComent">
+                                    <div ng-if="c.coment_id==li.id">
+                                        <p>{{li.val}} Likes</p>
+                                        <button class="btn-secondary" ng-click="likeComment(c.coment_id)">Like</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <input type="text" class="form-control col-md-12" ng-model = "coment.title" placeholder="titulo">
                     <input type="text" class="form-control col-md-12" ng-model = "coment.body" placeholder="Contenido">
                     <input type="file" class="col-md-6" name="imagen" file-model = 'comentFile'>
