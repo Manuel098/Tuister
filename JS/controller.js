@@ -91,6 +91,15 @@ tuister.controller('Demo', function($scope, $http, fileUpload){
         fileUpload.insert(uploadUrl, data);
     }
 
+    $scope.likeComment = function(id){
+        var uploadUrl = "http://tuister.com/likeComment";
+        var data = {
+            "user_id": window.localStorage.getItem("user_id"),
+            "comment_id": id
+        }
+        fileUpload.insert(uploadUrl, data);
+    }
+
     // POST'S
     $scope.uploadFile = function(){
         var file =$scope.myFile;
